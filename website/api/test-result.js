@@ -25,6 +25,14 @@ export default async function handler(req, res) {
           ${body.rank_earned || ''},
           ${body.tester || ''}
         )
+        ON CONFLICT (discord_id, mode)
+        DO UPDATE SET
+          username = EXCLUDED.username,
+          region = EXCLUDED.region,
+          previous_rank = EXCLUDED.previous_rank,
+          rank_earned = EXCLUDED.rank_earned,
+          tester = EXCLUDED.tester,
+          created_at = NOW()
       `;
 
       return res.status(200).json({ success: true, saved: true });

@@ -459,11 +459,16 @@
     });
 
     const tierScore = {
-      HT5: 1, LT5: 2,
-      HT4: 3, LT4: 4,
-      HT3: 5, LT3: 6,
-      HT2: 7, LT2: 8,
-      HT1: 9, LT1: 10
+      HT5: 1,
+      LT5: 2,
+      HT4: 3,
+      LT4: 4,
+      HT3: 5,
+      LT3: 6,
+      HT2: 7,
+      LT2: 8,
+      HT1: 9,
+      LT1: 10
     };
 
     let allResults = [];
@@ -505,16 +510,34 @@
       });
 
       filtered.sort((a, b) => {
-        if (sort === 'name') return (a.username || '').localeCompare(b.username || '');
-        if (sort === 'recent') return (new Date(b.updated_at || 0)).getTime() - (new Date(a.updated_at || 0)).getTime();
+        if (sort === 'name') {
+          return (a.username || '').localeCompare(b.username || '');
+        }
 
-        const aTier1 = (isTier1(a.smp) ? 1 : 0) + (isTier1(a.mace) ? 1 : 0);
-        const bTier1 = (isTier1(b.smp) ? 1 : 0) + (isTier1(b.mace) ? 1 : 0);
-        if (bTier1 !== aTier1) return bTier1 - aTier1;
+        if (sort === 'recent') {
+          return (new Date(b.updated_at || 0)).getTime() - (new Date(a.updated_at || 0)).getTime();
+        }
+
+        const aTier1Count = (isTier1(a.smp) ? 1 : 0) + (isTier1(a.mace) ? 1 : 0);
+        const bTier1Count = (isTier1(b.smp) ? 1 : 0) + (isTier1(b.mace) ? 1 : 0);
+
+        if (bTier1Count !== aTier1Count) {
+          return bTier1Count - aTier1Count;
+        }
+
+        const aBest = Math.max(score(a.smp), score(a.mace));
+        const bBest = Math.max(score(b.smp), score(b.mace));
+
+        if (bBest !== aBest) {
+          return bBest - aBest;
+        }
 
         const aCombined = score(a.smp) + score(a.mace);
         const bCombined = score(b.smp) + score(b.mace);
-        if (bCombined !== aCombined) return bCombined - aCombined;
+
+        if (bCombined !== aCombined) {
+          return bCombined - aCombined;
+        }
 
         return (a.username || '').localeCompare(b.username || '');
       });

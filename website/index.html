@@ -1,750 +1,145 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2685.4">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unstable Tiers</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  background:#0b0f1c;
+  color:white;
+}
+
+header{
+  text-align:center;
+  padding:40px;
+  font-size:40px;
+  font-weight:bold;
+  background:linear-gradient(90deg,#ff4fd8,#58a6ff);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+.tabs{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  margin:20px;
+}
+
+.tab{
+  background:#1a2033;
+  padding:10px 20px;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+.section{
+  display:none;
+  padding:20px;
+  max-width:900px;
+  margin:auto;
+}
+
+.active{
+  display:block;
+}
+
+.card{
+  background:#161b2d;
+  border-radius:10px;
+  padding:15px;
+  margin:10px 0;
+}
+
+.rank{
+  font-weight:bold;
+  color:#ffcc66;
+}
+
+</style>
 </head>
+
 <body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="en"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta charset="UTF-8" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;title&gt;Unstable Tiers&lt;/title&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;style&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>* { box-sizing: border-box; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>:root {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--bg: #070913;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--bg-2: #0d1220;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--panel: rgba(18, 21, 34, 0.92);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--panel-2: rgba(24, 28, 44, 0.96);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--border: rgba(255,255,255,0.08);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--border-strong: rgba(255,255,255,0.14);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--text: #f7f8ff;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--muted: #a9b1c7;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--pink: #ff4fd8;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--blue: #58a6ff;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--gold: #f4c95d;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--green: #47d7ac;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--red: #ff6b81;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--shadow: 0 18px 50px rgba(0,0,0,0.34);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--radius: 24px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>body {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin: 0;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-family: Inter, Arial, sans-serif;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: var(--text);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background:</p>
-<p class="p1"><span class="Apple-converted-space">        </span>radial-gradient(circle at top left, rgba(255,79,216,0.16), transparent 24%),</p>
-<p class="p1"><span class="Apple-converted-space">        </span>radial-gradient(circle at top right, rgba(88,166,255,0.14), transparent 26%),</p>
-<p class="p1"><span class="Apple-converted-space">        </span>linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>min-height: 100vh;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.container {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>max-width: 1350px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin: 0 auto;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 26px 18px 48px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.hero {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>position: relative;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>overflow: hidden;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: linear-gradient(135deg, rgba(255,79,216,0.14), rgba(88,166,255,0.14));</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid var(--border);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 32px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 28px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: grid;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>grid-template-columns: 120px 1fr;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gap: 20px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>align-items: center;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>box-shadow: var(--shadow);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>backdrop-filter: blur(12px);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.hero-logo {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>width: 120px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>height: 120px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>object-fit: cover;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 28px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border: 2px solid rgba(255,255,255,0.12);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: #111;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.hero h1 {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin: 0;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: clamp(2.2rem, 4vw, 3.6rem);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>line-height: 1;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>letter-spacing: -0.04em;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.gradient {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: linear-gradient(90deg, var(--pink), var(--blue));</p>
-<p class="p1"><span class="Apple-converted-space">      </span>-webkit-background-clip: text;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background-clip: text;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: transparent;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.hero p {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin: 12px 0 0;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: var(--muted);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>max-width: 860px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>line-height: 1.55;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.hero-stats {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: grid;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>grid-template-columns: repeat(4, minmax(140px, 1fr));</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gap: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-top: 18px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.stat {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: rgba(255,255,255,0.05);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid var(--border);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 18px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 14px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.stat-label {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: var(--muted);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 0.85rem;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 700;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>text-transform: uppercase;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>letter-spacing: 0.05em;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.stat-value {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-top: 6px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 1.45rem;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 900;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.toolbar {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: grid;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>grid-template-columns: 1fr auto auto;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gap: 14px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-top: 18px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>align-items: center;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.search,</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.select {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>width: 100%;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 16px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid var(--border);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: rgba(255,255,255,0.05);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: var(--text);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 14px 16px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 0.96rem;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>outline: none;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.tabs {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>flex-wrap: wrap;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gap: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-top: 22px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.tab-btn {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid var(--border);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: rgba(255,255,255,0.04);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: var(--text);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 14px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 12px 18px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 0.95rem;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 800;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>cursor: pointer;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>transition: .18s ease;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.tab-btn:hover,</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.tab-btn.active {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>transform: translateY(-2px);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: linear-gradient(90deg, rgba(255,79,216,0.16), rgba(88,166,255,0.16));</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-color: var(--border-strong);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.panel {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: none;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-top: 18px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: var(--panel);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid var(--border);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: var(--radius);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 22px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>box-shadow: var(--shadow);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.panel.active { display: block; }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.panel-header {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>justify-content: space-between;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>align-items: flex-start;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gap: 14px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>flex-wrap: wrap;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 18px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.panel-title {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin: 0;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 1.45rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.panel-sub {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin: 6px 0 0;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: var(--muted);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 0.95rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.mode-tag {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: inline-flex;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>align-items: center;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gap: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 16px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid var(--border);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: rgba(255,255,255,0.05);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 11px 15px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 800;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.mode-icon {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>width: 28px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>height: 28px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 8px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>object-fit: cover;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: #111;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.tier-grid {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: grid;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gap: 16px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.tier-card {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: var(--panel-2);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid var(--border);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 20px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 18px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>transition: .18s ease;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.tier-card:hover {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>transform: translateY(-4px);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-color: var(--border-strong);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.tier-rank {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: inline-block;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 8px 12px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 999px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 0.9rem;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 900;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>letter-spacing: 0.02em;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.rank-10 { background: #4a2a2a; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.rank-9 { background: #62403b; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.rank-8 { background: #725333; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.rank-7 { background: #71643a; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.rank-6 { background: #6e6d43; color: #111; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.rank-5 { background: #597445; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.rank-4 { background: #3e7262; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.rank-3 { background: #2f6982; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.rank-2 { background: #4a5fac; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.rank-1 { background: linear-gradient(90deg, var(--pink), var(--blue)); }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.tier-card h3 {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin: 0 0 8px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 1.16rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.tier-card p {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin: 0;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: var(--muted);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>line-height: 1.5;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 0.93rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.board {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: grid;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gap: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.entry {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>justify-content: space-between;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>align-items: center;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gap: 16px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 16px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 20px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: var(--panel-2);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid var(--border);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>flex-wrap: wrap;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.entry-left {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>align-items: center;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gap: 14px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>min-width: 0;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.place {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>width: 44px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>height: 44px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 14px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: grid;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>place-items: center;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: rgba(255,255,255,0.05);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: var(--gold);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 900;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.avatar {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>width: 48px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>height: 48px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 14px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>object-fit: cover;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: linear-gradient(135deg, rgba(255,79,216,0.2), rgba(88,166,255,0.2));</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: grid;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>place-items: center;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 900;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>overflow: hidden;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.name {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 1rem;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 900;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.meta {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-top: 4px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: var(--muted);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 0.9rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.ranks {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>flex-wrap: wrap;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gap: 8px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>justify-content: flex-end;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.small-rank {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: rgba(255,255,255,0.05);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid var(--border);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 999px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 8px 12px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 0.85rem;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 900;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.section-grid {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: grid;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>grid-template-columns: 1fr 1fr;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gap: 18px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.mini-panel {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: var(--panel-2);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid var(--border);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 20px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 18px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.mini-panel h3 {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin: 0 0 14px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>align-items: center;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gap: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 1.08rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.list {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: grid;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gap: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.list-item {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>justify-content: space-between;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gap: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>flex-wrap: wrap;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid rgba(255,255,255,0.06);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: rgba(255,255,255,0.04);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 14px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 12px 14px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.empty {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 18px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border: 1px dashed rgba(255,255,255,0.14);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: var(--muted);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 18px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>text-align: center;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: rgba(255,255,255,0.03);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.footer-note {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-top: 18px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: var(--muted);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>line-height: 1.55;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 0.92rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>@media (max-width: 950px) {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>.hero { grid-template-columns: 1fr; text-align: center; }</p>
-<p class="p1"><span class="Apple-converted-space">      </span>.hero-logo { margin: 0 auto; }</p>
-<p class="p1"><span class="Apple-converted-space">      </span>.hero-stats { grid-template-columns: repeat(2, minmax(120px, 1fr)); }</p>
-<p class="p1"><span class="Apple-converted-space">      </span>.toolbar { grid-template-columns: 1fr; }</p>
-<p class="p1"><span class="Apple-converted-space">      </span>.section-grid { grid-template-columns: 1fr; }</p>
-<p class="p1"><span class="Apple-converted-space">      </span>.ranks { justify-content: flex-start; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>@media (max-width: 560px) {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>.hero-stats { grid-template-columns: 1fr 1fr; }</p>
-<p class="p1"><span class="Apple-converted-space">      </span>.container { padding-inline: 12px; }</p>
-<p class="p1"><span class="Apple-converted-space">      </span>.panel, .hero { padding: 16px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="container"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;section class="hero"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;img class="hero-logo" src="https://media.discordapp.net/attachments/1482589653805699213/1482642012015558656/Untitled_design_5.png?ex=69b7b179&amp;is=69b65ff9&amp;hm=446f869b43892114bba83b6fa141664928e82846397570c20339da2fc0a969f0&amp;=&amp;format=webp&amp;quality=lossless&amp;width=1582&amp;height=1582" alt="Unstable Tiers Logo"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;h1&gt;&lt;span class="gradient"&gt;Unstable Tiers&lt;/span&gt; Website&lt;/h1&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;p&gt;Live tier rankings for &lt;strong&gt;SMP&lt;/strong&gt; and &lt;strong&gt;Mace&lt;/strong&gt;. Search players, check the combined leaderboard, and see every completed test as soon as it syncs from the bot.&lt;/p&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="hero-stats"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="stat"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="stat-label"&gt;Total Tests&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="stat-value" id="stat-tests"&gt;0&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="stat"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="stat-label"&gt;SMP Players&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="stat-value" id="stat-smp"&gt;0&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="stat"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="stat-label"&gt;Mace Players&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="stat-value" id="stat-mace"&gt;0&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="stat"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="stat-label"&gt;Dual Ranked&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="stat-value" id="stat-dual"&gt;0&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="toolbar"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;input id="searchInput" class="search" type="text" placeholder="Search players..." /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;select id="sortSelect" class="select"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;option value="best"&gt;Sort: Best Rank&lt;/option&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;option value="recent"&gt;Sort: Most Recent&lt;/option&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;option value="name"&gt;Sort: Name&lt;/option&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/select&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;select id="filterSelect" class="select"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;option value="all"&gt;Show: All&lt;/option&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;option value="tier1"&gt;Show: Tier 1 Only&lt;/option&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;option value="dual"&gt;Show: Dual Ranked&lt;/option&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/select&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="tabs"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="tab-btn active" data-tab="leaderboard"&gt;Leader Bored&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="tab-btn" data-tab="smp"&gt;SMP Tiers&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="tab-btn" data-tab="mace"&gt;Mace Tiers&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="tab-btn" data-tab="tested"&gt;Tested Players&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;section class="panel active" id="leaderboard"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="panel-header"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;h2 class="panel-title"&gt;Leader Bored&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;p class="panel-sub"&gt;Combined rankings ordered by best placements in both modes, then by total score.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="mode-tag"&gt;🏆 Live Combined Ranking&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="board" id="leaderboardList"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;p class="footer-note"&gt;Players with tier 1 in both modes appear first. This page updates live from the synced test results.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;section class="panel" id="smp"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="panel-header"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;h2 class="panel-title"&gt;SMP Tiers&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;p class="panel-sub"&gt;Worst to best: HT5, LT5, HT4, LT4, HT3, LT3, HT2, LT2, HT1, LT1.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="mode-tag"&gt;⚔️ SMP&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="tier-grid"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="tier-card"&gt;&lt;span class="tier-rank rank-10"&gt;HT5&lt;/span&gt;&lt;h3&gt;HT5&lt;/h3&gt;&lt;p&gt;Lowest placement in SMP testing.&lt;/p&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="tier-card"&gt;&lt;span class="tier-rank rank-9"&gt;LT5&lt;/span&gt;&lt;h3&gt;LT5&lt;/h3&gt;&lt;p&gt;Just above HT5, still near the bottom.&lt;/p&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="tier-card"&gt;&lt;span class="tier-rank rank-8"&gt;HT4&lt;/span&gt;&lt;h3&gt;HT4&lt;/h3&gt;&lt;p&gt;Improved fundamentals with more consistency.&lt;/p&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="tier-card"&gt;&lt;span class="tier-rank rank-7"&gt;LT4&lt;/span&gt;&lt;h3&gt;LT4&lt;/h3&gt;&lt;p&gt;Solid growth over tier 5 placements.&lt;/p&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="tier-card"&gt;&lt;span class="tier-rank rank-6"&gt;HT3&lt;/span&gt;&lt;h3&gt;HT3&lt;/h3&gt;&lt;p&gt;Middle placement with dependable skill.&lt;/p&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="tier-card"&gt;&lt;span class="tier-rank rank-5"&gt;LT3&lt;/span&gt;&lt;h3&gt;LT3&lt;/h3&gt;&lt;p&gt;Balanced SMP player with steady performance.&lt;/p&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="tier-card"&gt;&lt;span class="tier-rank rank-4"&gt;HT2&lt;/span&gt;&lt;h3&gt;HT2&lt;/h3&gt;&lt;p&gt;Strong placement with clear advanced skill.&lt;/p&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="tier-card"&gt;&lt;span class="tier-rank rank-3"&gt;LT2&lt;/span&gt;&lt;h3&gt;LT2&lt;/h3&gt;&lt;p&gt;Very strong player close to top placements.&lt;/p&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="tier-card"&gt;&lt;span class="tier-rank rank-2"&gt;HT1&lt;/span&gt;&lt;h3&gt;HT1&lt;/h3&gt;&lt;p&gt;Top-end SMP competitor with elite consistency.&lt;/p&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="tier-card"&gt;&lt;span class="tier-rank rank-1"&gt;LT1&lt;/span&gt;&lt;h3&gt;LT1&lt;/h3&gt;&lt;p&gt;Best SMP tier available.&lt;/p&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;section class="panel" id="mace"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="panel-header"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;h2 class="panel-title"&gt;Mace Tiers&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;p class="panel-sub"&gt;The same tier ladder, tracked separately for mace testing.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="mode-tag"&gt;&lt;img class="mode-icon" src="https://images-ext-1.discordapp.net/external/kVqqNztsdXGiPIIqHu274LSfSunomi0qzPWG0QW7VMU/%3Fsize%3D48%26name%3DMace%26lossless%3Dtrue/https/cdn.discordapp.com/emojis/1408475497939206267.webp?format=webp&amp;width=96&amp;height=96" alt="Mace"&gt; Mace&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="tier-grid"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="tier-card"&gt;&lt;span class="tier-rank rank-10"&gt;HT5&lt;/span&gt;&lt;h3&gt;HT5&lt;/h3&gt;&lt;p&gt;Lowest placement in mace testing.&lt;/p&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="tier-card"&gt;&lt;span class="tier-rank rank-9"&gt;LT5&lt;/span&gt;&lt;h3&gt;LT5&lt;/h3&gt;&lt;p&gt;Early mace fundamentals are still developing.&lt;/p&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="tier-card"&gt;&lt;span class="tier-rank rank-8"&gt;HT4&lt;/span&gt;&lt;h3&gt;HT4&lt;/h3&gt;&lt;p&gt;Improved mechanical understanding.&lt;/p&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="tier-card"&gt;&lt;span class="tier-rank rank-7"&gt;LT4&lt;/span&gt;&lt;h3&gt;LT4&lt;/h3&gt;&lt;p&gt;More stable control and cleaner fights.&lt;/p&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="tier-card"&gt;&lt;span class="tier-rank rank-6"&gt;HT3&lt;/span&gt;&lt;h3&gt;HT3&lt;/h3&gt;&lt;p&gt;Mid-tier mace performance.&lt;/p&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="tier-card"&gt;&lt;span class="tier-rank rank-5"&gt;LT3&lt;/span&gt;&lt;h3&gt;LT3&lt;/h3&gt;&lt;p&gt;Good overall results with steady consistency.&lt;/p&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="tier-card"&gt;&lt;span class="tier-rank rank-4"&gt;HT2&lt;/span&gt;&lt;h3&gt;HT2&lt;/h3&gt;&lt;p&gt;Strong mace placement above most players.&lt;/p&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="tier-card"&gt;&lt;span class="tier-rank rank-3"&gt;LT2&lt;/span&gt;&lt;h3&gt;LT2&lt;/h3&gt;&lt;p&gt;Very strong placement close to the top.&lt;/p&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="tier-card"&gt;&lt;span class="tier-rank rank-2"&gt;HT1&lt;/span&gt;&lt;h3&gt;HT1&lt;/h3&gt;&lt;p&gt;Elite mace skill with strong consistency.&lt;/p&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="tier-card"&gt;&lt;span class="tier-rank rank-1"&gt;LT1&lt;/span&gt;&lt;h3&gt;LT1&lt;/h3&gt;&lt;p&gt;Best mace tier available.&lt;/p&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;section class="panel" id="tested"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="panel-header"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;h2 class="panel-title"&gt;Tested Players&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;p class="panel-sub"&gt;Every player that has been tested, separated by game mode.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="mode-tag"&gt;📋 Live Mode Filters&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="section-grid"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="mini-panel"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;h3&gt;⚔️ SMP Tested Players&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="list" id="smpList"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="mini-panel"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;h3&gt;&lt;img class="mode-icon" src="https://images-ext-1.discordapp.net/external/kVqqNztsdXGiPIIqHu274LSfSunomi0qzPWG0QW7VMU/%3Fsize%3D48%26name%3DMace%26lossless%3Dtrue/https/cdn.discordapp.com/emojis/1408475497939206267.webp?format=webp&amp;width=96&amp;height=96" alt="Mace"&gt; Mace Tested Players&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="list" id="maceList"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;p class="footer-note"&gt;The site reads directly from synced results sent by the Discord bot. Refreshing the page or waiting for auto-refresh will show new tests.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/section&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const buttons = document.querySelectorAll('.tab-btn');</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const panels = document.querySelectorAll('.panel');</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const searchInput = document.getElementById('searchInput');</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const sortSelect = document.getElementById('sortSelect');</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const filterSelect = document.getElementById('filterSelect');</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>buttons.forEach(button =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>button.addEventListener('click', () =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>buttons.forEach(btn =&gt; btn.classList.remove('active'));</p>
-<p class="p1"><span class="Apple-converted-space">        </span>panels.forEach(panel =&gt; panel.classList.remove('active'));</p>
-<p class="p1"><span class="Apple-converted-space">        </span>button.classList.add('active');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById(button.dataset.tab).classList.add('active');</p>
-<p class="p1"><span class="Apple-converted-space">      </span>});</p>
-<p class="p1"><span class="Apple-converted-space">    </span>});</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>const tierScore = {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>HT5: 1, LT5: 2,</p>
-<p class="p1"><span class="Apple-converted-space">      </span>HT4: 3, LT4: 4,</p>
-<p class="p1"><span class="Apple-converted-space">      </span>HT3: 5, LT3: 6,</p>
-<p class="p1"><span class="Apple-converted-space">      </span>HT2: 7, LT2: 8,</p>
-<p class="p1"><span class="Apple-converted-space">      </span>HT1: 9, LT1: 10</p>
-<p class="p1"><span class="Apple-converted-space">    </span>};</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>let allResults = [];</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>function initial(name) {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>return (name || '?').trim().charAt(0).toUpperCase();</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>function isTier1(rank) {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>return rank === 'HT1' || rank === 'LT1';</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>function score(rank) {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>return tierScore[rank] || 0;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>function renderEmpty(el, text) {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>el.innerHTML = `&lt;div class="empty"&gt;${text}&lt;/div&gt;`;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>function playerAvatar(player) {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>return `&lt;div class="avatar"&gt;${initial(player.username)}&lt;/div&gt;`;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>function applyFilters(players) {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const search = searchInput.value.trim().toLowerCase();</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const sort = sortSelect.value;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const filter = filterSelect.value;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>let filtered = players.filter(player =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const matchesSearch = !search || (player.username || '').toLowerCase().includes(search);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>if (!matchesSearch) return false;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>if (filter === 'tier1') return isTier1(player.smp) || isTier1(player.mace);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>if (filter === 'dual') return !!player.smp &amp;&amp; !!player.mace;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>return true;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>});</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>filtered.sort((a, b) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>if (sort === 'name') return (a.username || '').localeCompare(b.username || '');</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>if (sort === 'recent') {</p>
-<p class="p1"><span class="Apple-converted-space">          </span>return (new Date(b.updated_at || 0)).getTime() - (new Date(a.updated_at || 0)).getTime();</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>const aTier1 = (isTier1(a.smp) ? 1 : 0) + (isTier1(a.mace) ? 1 : 0);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const bTier1 = (isTier1(b.smp) ? 1 : 0) + (isTier1(b.mace) ? 1 : 0);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>if (bTier1 !== aTier1) return bTier1 - aTier1;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>const aCombined = score(a.smp) + score(a.mace);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const bCombined = score(b.smp) + score(b.mace);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>if (bCombined !== aCombined) return bCombined - aCombined;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>return (a.username || '').localeCompare(b.username || '');</p>
-<p class="p1"><span class="Apple-converted-space">      </span>});</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>return filtered;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>function buildCombinedPlayers(results) {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const map = new Map();</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>results.forEach(result =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const key = String(result.discord_id || result.username || '').toLowerCase();</p>
-<p class="p1"><span class="Apple-converted-space">        </span>if (!key) return;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>if (!map.has(key)) {</p>
-<p class="p1"><span class="Apple-converted-space">          </span>map.set(key, {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>discord_id: result.discord_id || '',</p>
-<p class="p1"><span class="Apple-converted-space">            </span>username: result.username || 'Unknown',</p>
-<p class="p1"><span class="Apple-converted-space">            </span>smp: null,</p>
-<p class="p1"><span class="Apple-converted-space">            </span>mace: null,</p>
-<p class="p1"><span class="Apple-converted-space">            </span>updated_at: result.created_at || new Date().toISOString(),</p>
-<p class="p1"><span class="Apple-converted-space">          </span>});</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>const player = map.get(key);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const mode = String(result.mode || '').toLowerCase();</p>
-<p class="p1"><span class="Apple-converted-space">        </span>if (mode === 'smp') player.smp = result.rank_earned || null;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>if (mode === 'mace') player.mace = result.rank_earned || null;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>player.updated_at = result.created_at || new Date().toISOString();</p>
-<p class="p1"><span class="Apple-converted-space">      </span>});</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>return [...map.values()];</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>function renderStats(players, results) {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>document.getElementById('stat-tests').textContent = results.length;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>document.getElementById('stat-smp').textContent = players.filter(p =&gt; p.smp).length;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>document.getElementById('stat-mace').textContent = players.filter(p =&gt; p.mace).length;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>document.getElementById('stat-dual').textContent = players.filter(p =&gt; p.smp &amp;&amp; p.mace).length;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>function renderLeaderboard(players) {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const leaderboard = document.getElementById('leaderboardList');</p>
-<p class="p1"><span class="Apple-converted-space">      </span>if (!players.length) return renderEmpty(leaderboard, 'No ranked players yet. Submit a test from the bot to populate the leaderboard.');</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>leaderboard.innerHTML = players.map((player, index) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const tier1Count = (isTier1(player.smp) ? 1 : 0) + (isTier1(player.mace) ? 1 : 0);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const meta = tier1Count === 2 ? 'Tier 1 in both modes' : tier1Count === 1 ? 'Only one tier 1 mode' : 'Ranked player';</p>
-<p class="p1"><span class="Apple-converted-space">        </span>return `</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="entry"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="entry-left"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;div class="place"&gt;#${index + 1}&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>${playerAvatar(player)}</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="name"&gt;${player.username}&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="meta"&gt;${meta}&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="ranks"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;span class="small-rank"&gt;SMP: ${player.smp || 'Unranked'}&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;span class="small-rank"&gt;Mace: ${player.mace || 'Unranked'}&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>`;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}).join('');</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>function renderModeList(elId, results, mode) {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const list = document.getElementById(elId);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const search = searchInput.value.trim().toLowerCase();</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>const filtered = results</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.filter(r =&gt; String(r.mode || '').toLowerCase() === mode)</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.filter(r =&gt; !search || String(r.username || '').toLowerCase().includes(search))</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.sort((a, b) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">          </span>if (sortSelect.value === 'name') return String(a.username || '').localeCompare(String(b.username || ''));</p>
-<p class="p1"><span class="Apple-converted-space">          </span>if (sortSelect.value === 'recent') return (new Date(b.created_at || 0)).getTime() - (new Date(a.created_at || 0)).getTime();</p>
-<p class="p1"><span class="Apple-converted-space">          </span>return score(b.rank_earned) - score(a.rank_earned);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>});</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>if (!filtered.length) return renderEmpty(list, `No ${mode.toUpperCase()} tests yet.`);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>list.innerHTML = filtered.map(result =&gt; `</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="list-item"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;span&gt;${result.username || 'Unknown'} &lt;span style="color: var(--muted)"&gt;• ${result.region || 'No Region'}&lt;/span&gt;&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;strong&gt;${result.rank_earned || 'Unranked'}&lt;/strong&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>`).join('');</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>async function loadResults() {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>try {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const res = await fetch('/api/test-result?ts=' + Date.now());</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const data = await res.json();</p>
-<p class="p1"><span class="Apple-converted-space">        </span>allResults = Array.isArray(data) ? data : [];</p>
-<p class="p1"><span class="Apple-converted-space">        </span>renderAll();</p>
-<p class="p1"><span class="Apple-converted-space">      </span>} catch (err) {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>console.error(err);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>renderEmpty(document.getElementById('leaderboardList'), 'Could not load results right now.');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>renderEmpty(document.getElementById('smpList'), 'Could not load SMP results.');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>renderEmpty(document.getElementById('maceList'), 'Could not load Mace results.');</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>function renderAll() {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const combinedPlayers = buildCombinedPlayers(allResults);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const filteredPlayers = applyFilters(combinedPlayers);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>renderStats(combinedPlayers, allResults);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>renderLeaderboard(filteredPlayers);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>renderModeList('smpList', allResults, 'smp');</p>
-<p class="p1"><span class="Apple-converted-space">      </span>renderModeList('maceList', allResults, 'mace');</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>searchInput.addEventListener('input', renderAll);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>sortSelect.addEventListener('change', renderAll);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>filterSelect.addEventListener('change', renderAll);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>loadResults();</p>
-<p class="p1"><span class="Apple-converted-space">    </span>setInterval(loadResults, 5000);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/script&gt;</p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+
+<header>Unstable Tiers</header>
+
+<div class="tabs">
+  <div class="tab" onclick="showTab('leaderboard')">Leaderboard</div>
+  <div class="tab" onclick="showTab('smp')">SMP Tiers</div>
+  <div class="tab" onclick="showTab('mace')">Mace Tiers</div>
+</div>
+
+<div id="leaderboard" class="section active">
+<h2>Leader Board</h2>
+<div id="players"></div>
+</div>
+
+<div id="smp" class="section">
+<h2>SMP Tiers</h2>
+
+<div class="card">HT5</div>
+<div class="card">LT5</div>
+<div class="card">HT4</div>
+<div class="card">LT4</div>
+<div class="card">HT3</div>
+<div class="card">LT3</div>
+<div class="card">HT2</div>
+<div class="card">LT2</div>
+<div class="card">HT1</div>
+<div class="card">LT1</div>
+
+</div>
+
+<div id="mace" class="section">
+<h2>Mace Tiers</h2>
+
+<div class="card">HT5</div>
+<div class="card">LT5</div>
+<div class="card">HT4</div>
+<div class="card">LT4</div>
+<div class="card">HT3</div>
+<div class="card">LT3</div>
+<div class="card">HT2</div>
+<div class="card">LT2</div>
+<div class="card">HT1</div>
+<div class="card">LT1</div>
+
+</div>
+
+<script>
+
+function showTab(id){
+  document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"))
+  document.getElementById(id).classList.add("active")
+}
+
+async function loadPlayers(){
+  const res = await fetch("/api/test-result")
+  const data = await res.json()
+
+  const list = document.getElementById("players")
+  list.innerHTML=""
+
+  data.forEach(p=>{
+    const el=document.createElement("div")
+    el.className="card"
+    el.innerHTML=`
+      <b>${p.username}</b><br>
+      Mode: ${p.mode}<br>
+      Rank: <span class="rank">${p.rank_earned}</span>
+    `
+    list.appendChild(el)
+  })
+}
+
+loadPlayers()
+setInterval(loadPlayers,5000)
+
+</script>
+
 </body>
 </html>

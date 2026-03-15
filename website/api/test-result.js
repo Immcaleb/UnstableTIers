@@ -1,22 +1,44 @@
-let results = [];
+import { neon } from '@neondatabase/serverless';
 
-module.exports = (req, res) => {
-  if (req.method === "POST") {
-    const body = req.body || {};
+const sql = neon(process.env.DATABASE_URL);
 
-    results.push(body);
+export default async function handler(req, res) {
+  try {
+    if (req.method === 'POST') {
+      const body = req.body || {};
 
-    return res.status(200).json({
-      success: true,
-      received: body
-    });
-  }
+      await sql`
+        INSERT INTO test_results (
+          discord_id,
+          username,
+          mode,
+          region,
+          previous_rank,
+          rank_earned,
+          tester
+        ) VALUES (
+          ${body.discord_id || ''},
+          ${body.username || ''},
+          ${body.mode || ''},
+          ${body.region || ''},
+          ${body.previous_rank || ''},
+          ${body.rank_earned || ''},
+          ${body.tester || ''}
+        )
+      `;
 
-  if (req.method === "GET") {
+      return res.status(200).json({ success: true, saved: true });
+    }
+
+    const results = await sql`
+      SELECT *
+      FROM test_results
+      ORDER BY created_at DESC
+    `;
+
     return res.status(200).json(results);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: 'Database error' });
   }
-
-  return res.status(405).json({
-    error: "Method not allowed"
-  });
-};
+}

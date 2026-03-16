@@ -1,72 +1,94 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Unstable Tiers</title>
 
 <style>
 
-body{
-font-family:Arial;
+*{
+box-sizing:border-box;
 margin:0;
-background:#0b0f1c;
+padding:0;
+font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+background:linear-gradient(180deg,#060814,#0e1324);
 color:white;
 }
 
-.header{
-display:flex;
-align-items:center;
-gap:20px;
+/* HEADER */
+
+.hero{
+max-width:1100px;
+margin:40px auto;
 padding:30px;
+display:flex;
+gap:20px;
+align-items:center;
 background:#12172a;
-border-bottom:1px solid #20263b;
+border-radius:20px;
+border:1px solid rgba(255,255,255,.08);
 }
 
-.logo{
-width:90px;
-border-radius:10px;
+.hero img{
+width:120px;
+border-radius:20px;
 }
 
-.title{
-font-size:32px;
-font-weight:bold;
+.hero h1{
+font-size:40px;
+background:linear-gradient(90deg,#ff4fd8,#58a6ff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.hero p{
+margin-top:6px;
+color:#aeb7d7;
 }
 
 .discord{
-margin-left:auto;
+margin-top:12px;
+display:inline-block;
 background:#5865F2;
 padding:10px 18px;
-border-radius:8px;
-text-decoration:none;
+border-radius:10px;
 color:white;
+text-decoration:none;
 font-weight:bold;
 }
+
+/* TABS */
 
 .tabs{
 display:flex;
 justify-content:center;
 gap:10px;
-padding:20px;
+margin:30px;
 }
 
 .tabs button{
-background:#1a2138;
-color:white;
+background:#1b2238;
 border:none;
 padding:12px 20px;
-border-radius:8px;
-cursor:pointer;
+border-radius:10px;
+color:white;
 font-weight:bold;
+cursor:pointer;
 }
 
 .tabs button.active{
-background:#ff4fd8;
+background:linear-gradient(90deg,#ff4fd8,#58a6ff);
 }
+
+/* PANELS */
 
 .panel{
 display:none;
-max-width:900px;
+max-width:1000px;
 margin:auto;
 padding:10px;
 }
@@ -75,14 +97,17 @@ padding:10px;
 display:block;
 }
 
+/* PLAYER CARD */
+
 .player{
 display:flex;
 align-items:center;
 justify-content:space-between;
-background:#161d33;
-border-radius:10px;
+background:#161c2f;
+border-radius:12px;
 padding:14px;
 margin-bottom:10px;
+border:1px solid rgba(255,255,255,.05);
 }
 
 .left{
@@ -92,23 +117,32 @@ gap:14px;
 }
 
 .player img{
-width:40px;
-height:40px;
-border-radius:6px;
+width:46px;
+height:46px;
+border-radius:8px;
 image-rendering:pixelated;
 }
 
+.name{
+font-weight:bold;
+}
+
+.meta{
+font-size:13px;
+color:#aeb7d7;
+}
+
 .rank{
-background:#2b355e;
+background:#232b44;
 padding:6px 12px;
-border-radius:20px;
+border-radius:999px;
 font-weight:bold;
 }
 
 .empty{
 text-align:center;
-padding:30px;
-color:#999;
+padding:40px;
+color:#aeb7d7;
 }
 
 </style>
@@ -116,11 +150,13 @@ color:#999;
 
 <body>
 
-<div class="header">
+<div class="hero">
 
-<img class="logo" src="https://media.discordapp.net/attachments/1482589653805699213/1482642012015558656/Untitled_design_5.png">
+<img src="https://media.discordapp.net/attachments/1482589653805699213/1482642012015558656/Untitled_design_5.png">
 
-<div class="title">Unstable Tiers</div>
+<div>
+<h1>Unstable Tiers</h1>
+<p>Leaderboard for SMP and Mace testing</p>
 
 <a class="discord" href="https://discord.gg/7MCYPH5sdE" target="_blank">
 Join Discord
@@ -128,6 +164,7 @@ Join Discord
 
 </div>
 
+</div>
 
 <div class="tabs">
 
@@ -136,7 +173,6 @@ Join Discord
 <button class="tab" onclick="tab('mace',this)">Mace</button>
 
 </div>
-
 
 <div id="leaderboard" class="panel active">
 <div id="leaderboardList"></div>
@@ -150,13 +186,12 @@ Join Discord
 <div id="maceList"></div>
 </div>
 
-
 <script>
 
 let data=[]
 
 function head(name){
-return `https://mc-heads.net/avatar/${name}/40`
+return `https://mc-heads.net/avatar/${name}/100`
 }
 
 function tab(id,btn){
@@ -171,23 +206,23 @@ btn.classList.add("active")
 
 function render(){
 
-const leaderboard={}
+const players={}
 const smp=[]
 const mace=[]
 
 data.forEach(r=>{
 
-if(!leaderboard[r.username]){
-leaderboard[r.username]={username:r.username,smp:null,mace:null}
+if(!players[r.username]){
+players[r.username]={username:r.username,smp:null,mace:null}
 }
 
 if(r.mode==="smp"){
-leaderboard[r.username].smp=r.rank_earned
+players[r.username].smp=r.rank_earned
 smp.push(r)
 }
 
 if(r.mode==="mace"){
-leaderboard[r.username].mace=r.rank_earned
+players[r.username].mace=r.rank_earned
 mace.push(r)
 }
 
@@ -197,49 +232,57 @@ const lb=document.getElementById("leaderboardList")
 const smpList=document.getElementById("smpList")
 const maceList=document.getElementById("maceList")
 
-const players=Object.values(leaderboard)
+const list=Object.values(players)
 
-lb.innerHTML = players.length ? players.map(p=>`
+lb.innerHTML=list.length?list.map(p=>`
+
 <div class="player">
 
 <div class="left">
 <img src="${head(p.username)}">
+
 <div>
-<b>${p.username}</b><br>
-SMP: ${p.smp||"Unranked"} • Mace: ${p.mace||"Unranked"}
-</div>
+<div class="name">${p.username}</div>
+<div class="meta">SMP: ${p.smp||"Unranked"} • Mace: ${p.mace||"Unranked"}</div>
 </div>
 
 </div>
-`).join("") : `<div class="empty">No players yet</div>`
+
+</div>
+
+`).join(""):`<div class="empty">No players yet</div>`
 
 
-smpList.innerHTML = smp.length ? smp.map(r=>`
+smpList.innerHTML=smp.length?smp.map(r=>`
+
 <div class="player">
 
 <div class="left">
 <img src="${head(r.username)}">
-<div><b>${r.username}</b></div>
+<div class="name">${r.username}</div>
 </div>
 
 <div class="rank">${r.rank_earned}</div>
 
 </div>
-`).join("") : `<div class="empty">No SMP tests</div>`
+
+`).join(""):`<div class="empty">No SMP tests</div>`
 
 
-maceList.innerHTML = mace.length ? mace.map(r=>`
+maceList.innerHTML=mace.length?mace.map(r=>`
+
 <div class="player">
 
 <div class="left">
 <img src="${head(r.username)}">
-<div><b>${r.username}</b></div>
+<div class="name">${r.username}</div>
 </div>
 
 <div class="rank">${r.rank_earned}</div>
 
 </div>
-`).join("") : `<div class="empty">No Mace tests</div>`
+
+`).join(""):`<div class="empty">No Mace tests</div>`
 
 }
 
@@ -253,7 +296,6 @@ render()
 }
 
 load()
-
 setInterval(load,5000)
 
 </script>

@@ -4,357 +4,421 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Unstable Tiers</title>
+
 <style>
+
 *{box-sizing:border-box}
+
 body{
-  margin:0;
-  font-family:Arial, Helvetica, sans-serif;
-  background:linear-gradient(180deg,#0b0d16,#11162a);
-  color:#fff;
+margin:0;
+font-family:Arial, Helvetica, sans-serif;
+background:linear-gradient(180deg,#070913,#0d1220);
+color:white;
 }
-header{
-  padding:40px 20px;
-  text-align:center;
-  background:linear-gradient(90deg,rgba(255,79,216,.2),rgba(88,166,255,.2));
-  border-bottom:1px solid rgba(255,255,255,.08);
+
+/* HERO */
+
+.hero{
+max-width:1100px;
+margin:40px auto;
+padding:30px;
+display:flex;
+gap:20px;
+align-items:center;
+background:rgba(20,24,40,.9);
+border-radius:24px;
+border:1px solid rgba(255,255,255,.08);
 }
-h1{
-  margin:0;
-  font-size:42px;
-  background:linear-gradient(90deg,#ff4fd8,#58a6ff);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
+
+.hero img{
+width:120px;
+height:120px;
+border-radius:20px;
 }
-.sub{
-  color:#b8bfd8;
-  margin-top:10px;
+
+.hero h1{
+margin:0;
+font-size:40px;
+background:linear-gradient(90deg,#ff4fd8,#58a6ff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
 }
-.topbar{
-  max-width:1100px;
-  margin:20px auto 0;
-  display:grid;
-  grid-template-columns:1fr 180px;
-  gap:12px;
-  padding:0 16px;
+
+.hero p{
+color:#b5bdd9;
+margin-top:10px;
 }
+
+.discord{
+display:inline-block;
+margin-top:14px;
+background:#5865F2;
+padding:10px 16px;
+border-radius:10px;
+color:white;
+text-decoration:none;
+font-weight:bold;
+}
+
+/* SEARCH */
+
+.toolbar{
+max-width:1100px;
+margin:auto;
+display:grid;
+grid-template-columns:1fr 200px;
+gap:10px;
+padding:0 20px;
+}
+
 input,select{
-  width:100%;
-  padding:12px 14px;
-  border-radius:10px;
-  border:1px solid rgba(255,255,255,.08);
-  background:#171c30;
-  color:#fff;
+padding:12px;
+border-radius:10px;
+border:1px solid rgba(255,255,255,.08);
+background:#161c2f;
+color:white;
 }
+
+/* TABS */
+
 .tabs{
-  display:flex;
-  justify-content:center;
-  gap:12px;
-  flex-wrap:wrap;
-  margin:24px 0;
+display:flex;
+justify-content:center;
+gap:12px;
+margin:20px;
 }
+
 button{
-  padding:12px 18px;
-  border:none;
-  border-radius:10px;
-  background:#1b2238;
-  color:#fff;
-  cursor:pointer;
-  font-weight:700;
+background:#1b2238;
+color:white;
+border:none;
+padding:12px 18px;
+border-radius:10px;
+font-weight:bold;
+cursor:pointer;
 }
+
 button.active{
-  background:linear-gradient(90deg,#ff4fd8,#58a6ff);
+background:linear-gradient(90deg,#ff4fd8,#58a6ff);
 }
+
+/* PANELS */
+
 .panel{
-  display:none;
-  max-width:1100px;
-  margin:0 auto 30px;
-  padding:0 16px;
+display:none;
+max-width:1100px;
+margin:auto;
+padding:0 20px;
 }
-.panel.active{display:block}
+
+.panel.active{
+display:block;
+}
+
 .grid{
-  display:grid;
-  gap:12px;
+display:grid;
+gap:12px;
 }
+
+/* PLAYER CARD */
+
 .player{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  background:#161c2f;
-  border:1px solid rgba(255,255,255,.06);
-  border-radius:14px;
-  padding:14px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+background:#161c2f;
+border:1px solid rgba(255,255,255,.06);
+border-radius:14px;
+padding:14px;
 }
+
 .left{
-  display:flex;
-  align-items:center;
-  gap:12px;
+display:flex;
+align-items:center;
+gap:12px;
 }
+
 .place{
-  width:42px;
-  height:42px;
-  border-radius:10px;
-  display:grid;
-  place-items:center;
-  background:#232b44;
-  color:#f4c95d;
-  font-weight:900;
+width:42px;
+height:42px;
+background:#232b44;
+display:grid;
+place-items:center;
+border-radius:10px;
+font-weight:bold;
+color:#f4c95d;
 }
+
 .player img{
-  width:46px;
-  height:46px;
-  border-radius:10px;
-  image-rendering:pixelated;
+width:46px;
+height:46px;
+border-radius:10px;
+image-rendering:pixelated;
 }
+
 .name{
-  font-weight:800;
-  font-size:16px;
+font-weight:bold;
 }
+
 .meta{
-  font-size:13px;
-  color:#aeb7d7;
-  margin-top:4px;
+font-size:13px;
+color:#aeb7d7;
 }
+
 .badges{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-  justify-content:flex-end;
+display:flex;
+gap:8px;
 }
+
 .badge{
-  padding:8px 12px;
-  border-radius:999px;
-  font-size:13px;
-  font-weight:800;
-  background:#232b44;
+padding:8px 12px;
+border-radius:999px;
+background:#232b44;
+font-weight:bold;
+font-size:13px;
 }
-.rank{
-  min-width:74px;
-  text-align:center;
-}
+
 .lt1,.ht1{background:linear-gradient(90deg,#ff4fd8,#58a6ff)}
 .lt2,.ht2{background:#355d9b}
 .lt3,.ht3{background:#3c6f62}
 .lt4,.ht4{background:#6c5a34}
 .lt5,.ht5{background:#5a3f3f}
-.discord-link{
-  display:inline-block;
-  margin-top:14px;
-  color:#fff;
-  text-decoration:none;
-  background:#5865F2;
-  padding:10px 16px;
-  border-radius:10px;
-  font-weight:700;
-}
+
 .empty{
-  text-align:center;
-  color:#b8bfd8;
-  background:#161c2f;
-  border:1px dashed rgba(255,255,255,.1);
-  padding:18px;
-  border-radius:14px;
+text-align:center;
+padding:20px;
+color:#b5bdd9;
+border:1px dashed rgba(255,255,255,.1);
+border-radius:14px;
 }
+
 </style>
 </head>
+
 <body>
 
-<header>
-  <h1>Unstable Tiers</h1>
-  <div class="sub">NeoTiers-style leaderboard for SMP and Mace</div>
-  <a class="discord-link" href="https://discord.gg/7MCYPH5sdE" target="_blank">Join Discord</a>
-</header>
+<div class="hero">
 
-<div class="topbar">
-  <input id="search" placeholder="Search players...">
-  <select id="sort">
-    <option value="best">Best Rank</option>
-    <option value="recent">Most Recent</option>
-    <option value="name">Name</option>
-  </select>
+<img src="https://media.discordapp.net/attachments/1482589653805699213/1482642012015558656/Untitled_design_5.png">
+
+<div>
+<h1>Unstable Tiers</h1>
+<p>Leaderboard for SMP and Mace testing.</p>
+
+<a class="discord" href="https://discord.gg/7MCYPH5sdE" target="_blank">
+Join Discord
+</a>
+
 </div>
+
+</div>
+
+
+<div class="toolbar">
+
+<input id="search" placeholder="Search players">
+
+<select id="sort">
+<option value="best">Best Rank</option>
+<option value="recent">Most Recent</option>
+<option value="name">Name</option>
+</select>
+
+</div>
+
 
 <div class="tabs">
-  <button class="tab active" onclick="showTab('leaderboard', this)">Leader Bored</button>
-  <button class="tab" onclick="showTab('smp', this)">SMP</button>
-  <button class="tab" onclick="showTab('mace', this)">Mace</button>
+
+<button class="tab active" onclick="showTab('leaderboard',this)">Leader Bored</button>
+<button class="tab" onclick="showTab('smp',this)">SMP</button>
+<button class="tab" onclick="showTab('mace',this)">Mace</button>
+
 </div>
 
-<div id="leaderboard" class="panel active"><div id="leaderboardList" class="grid"></div></div>
-<div id="smp" class="panel"><div id="smpList" class="grid"></div></div>
-<div id="mace" class="panel"><div id="maceList" class="grid"></div></div>
+
+<div id="leaderboard" class="panel active">
+<div id="leaderboardList" class="grid"></div>
+</div>
+
+<div id="smp" class="panel">
+<div id="smpList" class="grid"></div>
+</div>
+
+<div id="mace" class="panel">
+<div id="maceList" class="grid"></div>
+</div>
+
 
 <script>
-const tierScore = {
-  HT5:1, LT5:2,
-  HT4:3, LT4:4,
-  HT3:5, LT3:6,
-  HT2:7, LT2:8,
-  HT1:9, LT1:10
+
+const tierScore={
+HT5:1,LT5:2,
+HT4:3,LT4:4,
+HT3:5,LT3:6,
+HT2:7,LT2:8,
+HT1:9,LT1:10
 };
 
-let rawData = [];
+let rawData=[];
 
-function showTab(id, btn){
-  document.querySelectorAll(".panel").forEach(p=>p.classList.remove("active"));
-  document.querySelectorAll(".tab").forEach(b=>b.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
-  btn.classList.add("active");
+function showTab(id,btn){
+document.querySelectorAll(".panel").forEach(p=>p.classList.remove("active"));
+document.querySelectorAll(".tab").forEach(b=>b.classList.remove("active"));
+document.getElementById(id).classList.add("active");
+btn.classList.add("active");
 }
 
 function score(rank){
-  return tierScore[rank] || 0;
+return tierScore[rank]||0;
 }
 
 function rankClass(rank){
-  return String(rank || "").toLowerCase();
+return String(rank||"").toLowerCase();
 }
 
 function mcHead(name){
-  return `https://mc-heads.net/avatar/${encodeURIComponent(name || "Steve")}/100`;
-}
-
-function renderEmpty(el, text){
-  el.innerHTML = `<div class="empty">${text}</div>`;
+return `https://mc-heads.net/avatar/${encodeURIComponent(name||"Steve")}/100`;
 }
 
 function combinePlayers(data){
-  const map = new Map();
 
-  for(const row of data){
-    const key = String(row.discord_id || row.username || "").toLowerCase();
-    if(!key) continue;
+const map=new Map();
 
-    if(!map.has(key)){
-      map.set(key, {
-        username: row.username || "Unknown",
-        discord_id: row.discord_id || "",
-        smp: null,
-        mace: null,
-        updated_at: row.created_at || ""
-      });
-    }
+data.forEach(r=>{
 
-    const p = map.get(key);
-    if(String(row.mode).toLowerCase() === "smp") p.smp = row.rank_earned;
-    if(String(row.mode).toLowerCase() === "mace") p.mace = row.rank_earned;
-    p.updated_at = row.created_at || p.updated_at;
-  }
+const key=(r.discord_id||r.username).toLowerCase();
 
-  return [...map.values()];
+if(!map.has(key)){
+map.set(key,{
+username:r.username,
+smp:null,
+mace:null,
+updated:r.created_at
+});
+}
+
+const p=map.get(key);
+
+if(r.mode==="smp")p.smp=r.rank_earned;
+if(r.mode==="mace")p.mace=r.rank_earned;
+
+});
+
+return [...map.values()];
 }
 
 function sortPlayers(players){
-  const mode = document.getElementById("sort").value;
 
-  return [...players].sort((a,b)=>{
-    if(mode === "name"){
-      return a.username.localeCompare(b.username);
-    }
+const mode=document.getElementById("sort").value;
 
-    if(mode === "recent"){
-      return new Date(b.updated_at || 0) - new Date(a.updated_at || 0);
-    }
+return players.sort((a,b)=>{
 
-    const aBest = Math.max(score(a.smp), score(a.mace));
-    const bBest = Math.max(score(b.smp), score(b.mace));
-    if(bBest !== aBest) return bBest - aBest;
+if(mode==="name")
+return a.username.localeCompare(b.username);
 
-    const aCombined = score(a.smp) + score(a.mace);
-    const bCombined = score(b.smp) + score(b.mace);
-    if(bCombined !== aCombined) return bCombined - aCombined;
+if(mode==="recent")
+return new Date(b.updated)-new Date(a.updated);
 
-    return a.username.localeCompare(b.username);
-  });
+const aBest=Math.max(score(a.smp),score(a.mace));
+const bBest=Math.max(score(b.smp),score(b.mace));
+
+return bBest-aBest;
+
+});
 }
 
-function playerCard(player, index){
-  return `
-    <div class="player">
-      <div class="left">
-        <div class="place">#${index + 1}</div>
-        <img src="${mcHead(player.username)}" alt="${player.username}">
-        <div>
-          <div class="name">${player.username}</div>
-          <div class="meta">SMP: ${player.smp || "Unranked"} • Mace: ${player.mace || "Unranked"}</div>
-        </div>
-      </div>
-      <div class="badges">
-        <div class="badge rank ${rankClass(player.smp)}">SMP ${player.smp || "-"}</div>
-        <div class="badge rank ${rankClass(player.mace)}">Mace ${player.mace || "-"}</div>
-      </div>
-    </div>
-  `;
+function playerCard(p,i){
+
+return `
+<div class="player">
+
+<div class="left">
+
+<div class="place">#${i+1}</div>
+
+<img src="${mcHead(p.username)}">
+
+<div>
+<div class="name">${p.username}</div>
+<div class="meta">SMP: ${p.smp||"Unranked"} • Mace: ${p.mace||"Unranked"}</div>
+</div>
+
+</div>
+
+<div class="badges">
+<div class="badge ${rankClass(p.smp)}">${p.smp||"-"}</div>
+<div class="badge ${rankClass(p.mace)}">${p.mace||"-"}</div>
+</div>
+
+</div>
+`;
 }
 
-function testCard(row){
-  return `
-    <div class="player">
-      <div class="left">
-        <img src="${mcHead(row.username)}" alt="${row.username}">
-        <div>
-          <div class="name">${row.username}</div>
-          <div class="meta">${row.region || "No Region"}</div>
-        </div>
-      </div>
-      <div class="badges">
-        <div class="badge rank ${rankClass(row.rank_earned)}">${row.rank_earned || "-"}</div>
-      </div>
-    </div>
-  `;
+function testCard(r){
+
+return `
+<div class="player">
+
+<div class="left">
+<img src="${mcHead(r.username)}">
+
+<div>
+<div class="name">${r.username}</div>
+<div class="meta">${r.region||"No Region"}</div>
+</div>
+</div>
+
+<div class="badge ${rankClass(r.rank_earned)}">${r.rank_earned}</div>
+
+</div>
+`;
 }
 
 function render(){
-  const search = document.getElementById("search").value.trim().toLowerCase();
 
-  const players = sortPlayers(
-    combinePlayers(rawData).filter(p => p.username.toLowerCase().includes(search))
-  );
+const search=document.getElementById("search").value.toLowerCase();
 
-  const smpRows = rawData
-    .filter(r => String(r.mode).toLowerCase() === "smp")
-    .filter(r => String(r.username || "").toLowerCase().includes(search))
-    .sort((a,b)=>score(b.rank_earned)-score(a.rank_earned));
+const players=sortPlayers(
+combinePlayers(rawData)
+.filter(p=>p.username.toLowerCase().includes(search))
+);
 
-  const maceRows = rawData
-    .filter(r => String(r.mode).toLowerCase() === "mace")
-    .filter(r => String(r.username || "").toLowerCase().includes(search))
-    .sort((a,b)=>score(b.rank_earned)-score(a.rank_earned));
+const smp=rawData.filter(r=>r.mode==="smp");
+const mace=rawData.filter(r=>r.mode==="mace");
 
-  const leaderboard = document.getElementById("leaderboardList");
-  const smp = document.getElementById("smpList");
-  const mace = document.getElementById("maceList");
+const lb=document.getElementById("leaderboardList");
+const smpList=document.getElementById("smpList");
+const maceList=document.getElementById("maceList");
 
-  if(players.length){
-    leaderboard.innerHTML = players.map(playerCard).join("");
-  } else {
-    renderEmpty(leaderboard, "No leaderboard players found.");
-  }
+lb.innerHTML=players.length
+?players.map(playerCard).join("")
+:`<div class="empty">No players yet</div>`;
 
-  if(smpRows.length){
-    smp.innerHTML = smpRows.map(testCard).join("");
-  } else {
-    renderEmpty(smp, "No SMP tests found.");
-  }
+smpList.innerHTML=smp.length
+?smp.map(testCard).join("")
+:`<div class="empty">No SMP tests</div>`;
 
-  if(maceRows.length){
-    mace.innerHTML = maceRows.map(testCard).join("");
-  } else {
-    renderEmpty(mace, "No Mace tests found.");
-  }
+maceList.innerHTML=mace.length
+?mace.map(testCard).join("")
+:`<div class="empty">No Mace tests</div>`;
+
 }
 
 async function load(){
-  const res = await fetch("/api/test-result");
-  rawData = await res.json();
-  render();
+
+const r=await fetch("/api/test-result");
+rawData=await r.json();
+
+render();
+
 }
 
-document.getElementById("search").addEventListener("input", render);
-document.getElementById("sort").addEventListener("change", render);
+document.getElementById("search").addEventListener("input",render);
+document.getElementById("sort").addEventListener("change",render);
 
 load();
-setInterval(load, 5000);
+setInterval(load,5000);
+
 </script>
 
 </body>

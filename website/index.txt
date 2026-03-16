@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unstable Tiers</title>
+
+<style>
+*{box-sizing:border-box}
+
+:root{
+--bg:#070913;
+--bg2:#0d1220;
+--panel:#121522;
+--panel2:#181c2c;
+--border:rgba(255,255,255,0.08);
+--text:#f7f8ff;
+--muted:#a9b1c7;
+--pink:#ff4fd8;
+--blue:#58a6ff;
+--gold:#f4c95d;
+--radius:22px;
+}
+
+body{
+margin:0;
+font-family:Inter,Arial,sans-serif;
+color:var(--text);
+background:
+radial-gradient(circle at top left,rgba(255,79,216,0.16),transparent 24%),
+radial-gradient(circle at top right,rgba(88,166,255,0.14),transparent 26%),
+linear-gradient(180deg,var(--bg),var(--bg2));
+}
+
+.container{
+max-width:1300px;
+margin:auto;
+padding:30px 20px;
+}
+
+.hero{
+display:grid;
+grid-template-columns:120px 1fr;
+gap:20px;
+align-items:center;
+padding:28px;
+border-radius:32px;
+background:linear-gradient(135deg,rgba(255,79,216,0.12),rgba(88,166,255,0.12));
+border:1px solid var(--border);
+}
+
+.hero-logo{
+width:120px;
+height:120px;
+border-radius:24px;
+object-fit:cover;
+}
+
+.hero h1{
+margin:0;
+font-size:3rem;
+}
+
+.gradient{
+background:linear-gradient(90deg,var(--pink),var(--blue));
+-webkit-background-clip:text;
+color:transparent;
+}
+
+.hero p{
+margin-top:10px;
+color:var(--muted);
+}
+
+.invite{
+display:inline-block;
+margin-top:14px;
+padding:12px 18px;
+border-radius:14px;
+background:linear-gradient(90deg,var(--pink),var(--blue));
+color:white;
+font-weight:700;
+text-decoration:none;
+}
+
+.hero-stats{
+margin-top:18px;
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:10px;
+}
+
+.stat{
+background:rgba(255,255,255,0.05);
+border:1px solid var(--border);
+border-radius:16px;
+padding:14px;
+}
+
+.stat-label{
+font-size:.8rem;
+color:var(--muted);
+text-transform:uppercase;
+}
+
+.stat-value{
+font-size:1.4rem;
+font-weight:900;
+margin-top:4px;
+}
+
+.toolbar{
+margin-top:18px;
+display:grid;
+grid-template-columns:1fr auto auto;
+gap:12px;
+}
+
+.search,.select{
+padding:12px 14px;
+border-radius:14px;
+border:1px solid var(--border);
+background:rgba(255,255,255,0.05);
+color:var(--text);
+}
+
+.tabs{
+display:flex;
+gap:10px;
+margin-top:20px;
+}
+
+.tab-btn{
+padding:10px 16px;
+border-radius:12px;
+border:1px solid var(--border);
+background:rgba(255,255,255,0.05);
+cursor:pointer;
+font-weight:700;
+}
+
+.tab-btn.active{
+background:linear-gradient(90deg,rgba(255,79,216,.2),rgba(88,166,255,.2));
+}
+
+.panel{
+display:none;
+margin-top:20px;
+background:var(--panel);
+border:1px solid var(--border);
+border-radius:var(--radius);
+padding:20px;
+}
+
+.panel.active{display:block}
+
+.board{
+display:grid;
+gap:12px;
+}
+
+.entry{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:14px;
+border-radius:16px;
+background:var(--panel2);
+border:1px solid var(--border);
+}
+
+.entry-left{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.place{
+width:40px;
+height:40px;
+border-radius:12px;
+background:rgba(255,255,255,0.05);
+display:grid;
+place-items:center;
+font-weight:900;
+color:var(--gold);
+}
+
+.avatar{
+width:44px;
+height:44px;
+border-radius:12px;
+}
+
+.name{
+font-weight:900;
+}
+
+.ranks{
+display:flex;
+gap:8px;
+}
+
+.rank{
+background:rgba(255,255,255,0.05);
+border:1px solid var(--border);
+padding:6px 10px;
+border-radius:999px;
+font-weight:800;
+font-size:.85rem;
+}
+
+.list{
+display:grid;
+gap:10px;
+}
+
+.list-item{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:12px;
+border-radius:12px;
+background:rgba(255,255,255,0.05);
+border:1px solid var(--border);
+}
+
+.empty{
+padding:16px;
+text-align:center;
+color:var(--muted);
+border:1px dashed var(--border);
+border-radius:14px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<section class="hero">
+<img class="hero-logo" src="https://media.discordapp.net/attachments/1482589653805699213/1482642012015558656/Untitled_design_5.png" />
+
+<div>
+<h1><span class="gradient">Unstable Tiers</span></h1>
+<p>Live ranking website for SMP and Mace tests.</p>
+
+<a class="invite" href="https://discord.gg/7MCYPH5sdE" target="_blank">Join Discord</a>
+
+<div class="hero-stats">
+<div class="stat"><div class="stat-label">Tests</div><div class="stat-value" id="stat-tests">0</div></div>
+<div class="stat"><div class="stat-label">SMP</div><div class="stat-value" id="stat-smp">0</div></div>
+<div class="stat"><div class="stat-label">Mace</div><div class="stat-value" id="stat-mace">0</div></div>
+<div class="stat"><div class="stat-label">Dual</div><div class="stat-value" id="stat-dual">0</div></div>
+</div>
+
+</div>
+</section>
+
+<div class="toolbar">
+<input id="search" class="search" placeholder="Search players">
+<select id="sort" class="select">
+<option value="best">Best Rank</option>
+<option value="recent">Recent</option>
+<option value="name">Name</option>
+</select>
+
+<select id="filter" class="select">
+<option value="all">All</option>
+<option value="tier1">Tier 1</option>
+<option value="dual">Dual Ranked</option>
+</select>
+</div>
+
+<div class="tabs">
+<button class="tab-btn active" data-tab="leaderboard">Leaderboard</button>
+<button class="tab-btn" data-tab="smp">SMP</button>
+<button class="tab-btn" data-tab="mace">Mace</button>
+</div>
+
+<section class="panel active" id="leaderboard">
+<div class="board" id="leaderboardList"></div>
+</section>
+
+<section class="panel" id="smp">
+<div class="list" id="smpList"></div>
+</section>
+
+<section class="panel" id="mace">
+<div class="list" id="maceList"></div>
+</section>
+
+</div>
+
+<script>
+
+const tierScore={
+HT5:1,LT5:2,
+HT4:3,LT4:4,
+HT3:5,LT3:6,
+HT2:7,LT2:8,
+HT1:9,LT1:10
+}
+
+function score(t){return tierScore[t]||0}
+
+function skin(name){
+return `https://mc-heads.net/avatar/${encodeURIComponent(name)}/100`
+}
+
+let results=[]
+
+async function load(){
+const res=await fetch("/api/test-result?"+Date.now())
+results=await res.json()
+render()
+}
+
+function combine(){
+const map={}
+
+results.forEach(r=>{
+const name=(r.username||"unknown").toLowerCase()
+
+if(!map[name]){
+map[name]={
+username:r.username,
+smp:null,
+mace:null,
+updated:r.created_at
+}
+}
+
+if(r.mode==="smp") map[name].smp=r.rank_earned
+if(r.mode==="mace") map[name].mace=r.rank_earned
+})
+
+return Object.values(map)
+}
+
+function render(){
+
+const players=combine()
+
+document.getElementById("stat-tests").textContent=results.length
+document.getElementById("stat-smp").textContent=players.filter(p=>p.smp).length
+document.getElementById("stat-mace").textContent=players.filter(p=>p.mace).length
+document.getElementById("stat-dual").textContent=players.filter(p=>p.smp&&p.mace).length
+
+const board=document.getElementById("leaderboardList")
+
+if(!players.length){
+board.innerHTML=`<div class="empty">No players yet</div>`
+return
+}
+
+players.sort((a,b)=>score(b.smp)+score(b.mace)-score(a.smp)-score(a.mace))
+
+board.innerHTML=players.map((p,i)=>`
+<div class="entry">
+<div class="entry-left">
+<div class="place">#${i+1}</div>
+<img class="avatar" src="${skin(p.username)}">
+<div class="name">${p.username}</div>
+</div>
+<div class="ranks">
+<div class="rank">SMP: ${p.smp||"Unranked"}</div>
+<div class="rank">Mace: ${p.mace||"Unranked"}</div>
+</div>
+</div>
+`).join("")
+
+const smp=document.getElementById("smpList")
+smp.innerHTML=results.filter(r=>r.mode==="smp").map(r=>`
+<div class="list-item">
+<span>${r.username}</span>
+<strong>${r.rank_earned}</strong>
+</div>
+`).join("")
+
+const mace=document.getElementById("maceList")
+mace.innerHTML=results.filter(r=>r.mode==="mace").map(r=>`
+<div class="list-item">
+<span>${r.username}</span>
+<strong>${r.rank_earned}</strong>
+</div>
+`).join("")
+
+}
+
+load()
+setInterval(load,5000)
+
+document.querySelectorAll(".tab-btn").forEach(b=>{
+b.onclick=()=>{
+document.querySelectorAll(".tab-btn").forEach(x=>x.classList.remove("active"))
+document.querySelectorAll(".panel").forEach(x=>x.classList.remove("active"))
+b.classList.add("active")
+document.getElementById(b.dataset.tab).classList.add("active")
+}
+})
+
+</script>
+
+</body>
+</html>

@@ -1,4 +1,4 @@
-import { neon } from '@neondatabase/serverless';
+ import { neon } from '@neondatabase/serverless';
 
 const sql = neon(process.env.DATABASE_URL);
 
@@ -38,13 +38,17 @@ export default async function handler(req, res) {
       return res.status(200).json({ success: true, saved: true });
     }
 
-    const results = await sql`
-      SELECT *
-      FROM test_results
-      ORDER BY created_at DESC
-    `;
+    if (req.method === 'GET') {
+      const results = await sql`
+        SELECT *
+        FROM test_results
+        ORDER BY created_at DESC
+      `;
 
-    return res.status(200).json(results);
+      return res.status(200).json(results);
+    }
+
+    return res.status(405).json({ error: 'Method not allowed' });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ error: 'Database error' });
